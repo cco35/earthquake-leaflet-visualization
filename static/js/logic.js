@@ -14,13 +14,14 @@ let url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.ge
 
 // Create function to append color based on earthquake depth
 function chooseColor(depth) {
-    if (depth > 90) return "red";
-    else if (depth > 70) return "orange";
-    else if (depth> 50) return "lightorange";
-    else if (depth > 30) return "yellow";
-    else if (depth > 10) return "green";
-    else return "lightgreen";
+    if (depth > 90) return '#d73027'; //red
+    else if (depth > 70) return '#fc8d59'; //pale orange
+    else if (depth> 50) return '#fee08b'; //pale yellow
+    else if (depth > 30) return '#d9ef8b'; //lime
+    else if (depth > 10) return '#91cf60'; //light green
+    else return '#1a9850'; //green
 }
+
 
 // Get the data with d3.
 d3.json(url).then(function(data) {
@@ -48,26 +49,28 @@ L.geoJson(data, {
 });
 
 // Define legend content
-    let legendContent = '<div class="legend">' +
-        '<div class="legend-item"><span style="background-color: red"></span> Depth > 90</div>' +
-        '<div class="legend-item"><span style="background-color: orange"></span> Depth > 70</div>' +
-        '<div class="legend-item"><span style="background-color: lightorange"></span> Depth > 50</div>' +
-        '<div class="legend-item"><span style="background-color: yellow"></span> Depth > 30</div>' +
-        '<div class="legend-item"><span style="background-color: green"></span> Depth > 10</div>' +
-        '<div class="legend-item"><span style="background-color: lightgreen"></span> Depth <= 10</div>' +
-        '</div>';
+let legendContent = '<div class="legend-box">' +
+'<div class="legend-item"><span style="background-color: #1a9850"></span> -10-10</div>' +
+'<div class="legend-item"><span style="background-color: #91cf60"></span> 10-30</div>' +
+'<div class="legend-item"><span style="background-color: #d9ef8b"></span> 30-50</div>' +
+'<div class="legend-item"><span style="background-color: #fee08b"></span> 50-70</div>' +
+'<div class="legend-item"><span style="background-color: #fc8d59"></span> 70-90</div>' +
+'<div class="legend-item"><span style="background-color: #d73027"></span> 90+</div>' +
+'</div>';
 
-    // Create a legend control
-    let legend = L.control({ position: 'bottomright' });
+// Create legend box
+let legendStyle = document.createElement('style');
+legendStyle.innerHTML = '.legend-box { background-color: white; border: 1px solid #ccc; padding: 10px; margin: 10px; }';
+document.head.appendChild(legendStyle);
 
-    legend.onAdd = function(map) {
-        let div = L.DomUtil.create('div', 'info legend');
-        div.innerHTML = legendContent;
-        return div;
-    };
+// Create a legend control
+let legend = L.control({ position: 'bottomright' });
 
-    // Add legend to the map
-    legend.addTo(myMap);
+legend.onAdd = function(map) {
+   let div = L.DomUtil.create('div', 'info legend');
+   div.innerHTML = legendContent;
+   return div;
+};
 
-    // Add GeoJSON layer to the legend control
-    legend.addOverlay(geojsonLayer, 'Earthquake Circles');;
+// Add legend to the map
+legend.addTo(myMap);
