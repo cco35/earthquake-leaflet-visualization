@@ -14,12 +14,12 @@ let url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.ge
 
 // Create function to append color based on earthquake depth
 function chooseColor(depth) {
-    if (depth > 90) return '#d73027'; //red
-    else if (depth > 70) return '#fc8d59'; //pale orange
-    else if (depth> 50) return '#fee08b'; //pale yellow
-    else if (depth > 30) return '#d9ef8b'; //lime
-    else if (depth > 10) return '#91cf60'; //light green
-    else return '#1a9850'; //green
+    if (depth > 90) return '#ff0800'; //candy apple red
+    else if (depth > 70) return '#ed9121'; //carrot orange
+    else if (depth> 50) return '#fff600'; //cadmium yellow
+    else if (depth > 30) return '#fee08b'; //pale yellow 
+    else if (depth > 10) return '#458b00'; //chartreuse 4
+    else return '#66ff00'; //bright green
 }
 
 
@@ -50,12 +50,12 @@ L.geoJson(data, {
 
 // Define legend content
 let legendContent = '<div class="legend-box">' +
-'<div class="legend-item"><span style="background-color: #1a9850"></span> -10-10</div>' +
-'<div class="legend-item"><span style="background-color: #91cf60"></span> 10-30</div>' +
-'<div class="legend-item"><span style="background-color: #d9ef8b"></span> 30-50</div>' +
-'<div class="legend-item"><span style="background-color: #fee08b"></span> 50-70</div>' +
-'<div class="legend-item"><span style="background-color: #fc8d59"></span> 70-90</div>' +
-'<div class="legend-item"><span style="background-color: #d73027"></span> 90+</div>' +
+'<div class="legend-item"><span style="background-color: #66ff00"></span> -10-10</div>' +
+'<div class="legend-item"><span style="background-color: #458b00"></span> 10-30</div>' +
+'<div class="legend-item"><span style="background-color: #fee08b"></span> 30-50</div>' +
+'<div class="legend-item"><span style="background-color: #fff600"></span> 50-70</div>' +
+'<div class="legend-item"><span style="background-color: #ed9121"></span> 70-90</div>' +
+'<div class="legend-item"><span style="background-color: #ff0800"></span> 90+</div>' +
 '</div>';
 
 // Create legend box
